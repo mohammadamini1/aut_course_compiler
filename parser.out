@@ -1,0 +1,2499 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> PROGRAM IDENTIFIER declarations compound_statement
+Rule 2     declarations -> VAR declaration_list
+Rule 3     declarations -> empty
+Rule 4     declaration_list -> identifier_list DOUBLEDOT type
+Rule 5     declaration_list -> declaration_list SEMICOLON identifier_list DOUBLEDOT type
+Rule 6     identifier_list -> IDENTIFIER
+Rule 7     identifier_list -> identifier_list COMMA IDENTIFIER
+Rule 8     type -> INTEGER
+Rule 9     type -> REAL
+Rule 10    compound_statement -> BEGIN statement_list END
+Rule 11    statement_list -> statement
+Rule 12    statement_list -> statement_list SEMICOLON statement
+Rule 13    statement -> IDENTIFIER ASSIGN exp
+Rule 14    statement -> IF exp THEN statement ELSE statement
+Rule 15    statement -> IF exp THEN statement
+Rule 16    statement -> WHILE exp DO statement
+Rule 17    statement -> compound_statement
+Rule 18    statement -> PRINT LCB exp RCB
+Rule 19    statement -> SWITCH exp OF cases default_case DONE
+Rule 20    default_case -> DEFAULT statement SEMICOLON
+Rule 21    default_case -> empty
+Rule 22    cases -> constant_list DOUBLEDOT statement SEMICOLON cases
+Rule 23    cases -> empty
+Rule 24    constant_list -> constant
+Rule 25    constant_list -> constant_list COMMA constant
+Rule 26    constant -> REAL_CONSTANT
+Rule 27    constant -> INTEGER_CONSTANT
+Rule 28    exp -> INTEGER_CONSTANT
+Rule 29    exp -> REAL_CONSTANT
+Rule 30    exp -> IDENTIFIER
+Rule 31    exp -> exp SUM exp
+Rule 32    exp -> exp SUB exp
+Rule 33    exp -> exp MUL exp
+Rule 34    exp -> exp DIV exp
+Rule 35    exp -> SUB exp
+Rule 36    exp -> exp MOD exp
+Rule 37    exp -> exp L exp
+Rule 38    exp -> exp E exp
+Rule 39    exp -> exp G exp
+Rule 40    exp -> exp NE exp
+Rule 41    exp -> exp LE exp
+Rule 42    exp -> exp GE exp
+Rule 43    exp -> exp AND exp
+Rule 44    exp -> exp OR exp
+Rule 45    exp -> NOT exp
+Rule 46    exp -> LCB exp RCB
+Rule 47    empty -> <empty>
+
+Terminals, with rules where they appear
+
+AND                  : 43
+ASSIGN               : 13
+BEGIN                : 10
+COMMA                : 7 25
+DEFAULT              : 20
+DIV                  : 34
+DO                   : 16
+DONE                 : 19
+DOUBLEDOT            : 4 5 22
+E                    : 38
+ELSE                 : 14
+END                  : 10
+G                    : 39
+GE                   : 42
+IDENTIFIER           : 1 6 7 13 30
+IF                   : 14 15
+INTEGER              : 8
+INTEGER_CONSTANT     : 27 28
+L                    : 37
+LCB                  : 18 46
+LE                   : 41
+MOD                  : 36
+MUL                  : 33
+NE                   : 40
+NOT                  : 45
+OF                   : 19
+OR                   : 44
+PRINT                : 18
+PROGRAM              : 1
+RCB                  : 18 46
+REAL                 : 9
+REAL_CONSTANT        : 26 29
+SEMICOLON            : 5 12 20 22
+SUB                  : 32 35
+SUM                  : 31
+SWITCH               : 19
+THEN                 : 14 15
+VAR                  : 2
+WHILE                : 16
+error                : 
+
+Nonterminals, with rules where they appear
+
+cases                : 19 22
+compound_statement   : 1 17
+constant             : 24 25
+constant_list        : 22 25
+declaration_list     : 2 5
+declarations         : 1
+default_case         : 19
+empty                : 3 21 23
+exp                  : 13 14 15 16 18 19 31 31 32 32 33 33 34 34 35 36 36 37 37 38 38 39 39 40 40 41 41 42 42 43 43 44 44 45 46
+identifier_list      : 4 5 7
+program              : 0
+statement            : 11 12 14 14 15 16 20 22
+statement_list       : 10 12
+type                 : 4 5
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . PROGRAM IDENTIFIER declarations compound_statement
+
+    PROGRAM         shift and go to state 2
+
+    program                        shift and go to state 1
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> PROGRAM . IDENTIFIER declarations compound_statement
+
+    IDENTIFIER      shift and go to state 3
+
+
+state 3
+
+    (1) program -> PROGRAM IDENTIFIER . declarations compound_statement
+    (2) declarations -> . VAR declaration_list
+    (3) declarations -> . empty
+    (47) empty -> .
+
+    VAR             shift and go to state 5
+    BEGIN           reduce using rule 47 (empty -> .)
+
+    declarations                   shift and go to state 4
+    empty                          shift and go to state 6
+
+state 4
+
+    (1) program -> PROGRAM IDENTIFIER declarations . compound_statement
+    (10) compound_statement -> . BEGIN statement_list END
+
+    BEGIN           shift and go to state 8
+
+    compound_statement             shift and go to state 7
+
+state 5
+
+    (2) declarations -> VAR . declaration_list
+    (4) declaration_list -> . identifier_list DOUBLEDOT type
+    (5) declaration_list -> . declaration_list SEMICOLON identifier_list DOUBLEDOT type
+    (6) identifier_list -> . IDENTIFIER
+    (7) identifier_list -> . identifier_list COMMA IDENTIFIER
+
+    IDENTIFIER      shift and go to state 11
+
+    declaration_list               shift and go to state 9
+    identifier_list                shift and go to state 10
+
+state 6
+
+    (3) declarations -> empty .
+
+    BEGIN           reduce using rule 3 (declarations -> empty .)
+
+
+state 7
+
+    (1) program -> PROGRAM IDENTIFIER declarations compound_statement .
+
+    $end            reduce using rule 1 (program -> PROGRAM IDENTIFIER declarations compound_statement .)
+
+
+state 8
+
+    (10) compound_statement -> BEGIN . statement_list END
+    (11) statement_list -> . statement
+    (12) statement_list -> . statement_list SEMICOLON statement
+    (13) statement -> . IDENTIFIER ASSIGN exp
+    (14) statement -> . IF exp THEN statement ELSE statement
+    (15) statement -> . IF exp THEN statement
+    (16) statement -> . WHILE exp DO statement
+    (17) statement -> . compound_statement
+    (18) statement -> . PRINT LCB exp RCB
+    (19) statement -> . SWITCH exp OF cases default_case DONE
+    (10) compound_statement -> . BEGIN statement_list END
+
+    IDENTIFIER      shift and go to state 14
+    IF              shift and go to state 15
+    WHILE           shift and go to state 16
+    PRINT           shift and go to state 18
+    SWITCH          shift and go to state 19
+    BEGIN           shift and go to state 8
+
+    statement_list                 shift and go to state 12
+    statement                      shift and go to state 13
+    compound_statement             shift and go to state 17
+
+state 9
+
+    (2) declarations -> VAR declaration_list .
+    (5) declaration_list -> declaration_list . SEMICOLON identifier_list DOUBLEDOT type
+
+    BEGIN           reduce using rule 2 (declarations -> VAR declaration_list .)
+    SEMICOLON       shift and go to state 20
+
+
+state 10
+
+    (4) declaration_list -> identifier_list . DOUBLEDOT type
+    (7) identifier_list -> identifier_list . COMMA IDENTIFIER
+
+    DOUBLEDOT       shift and go to state 21
+    COMMA           shift and go to state 22
+
+
+state 11
+
+    (6) identifier_list -> IDENTIFIER .
+
+    DOUBLEDOT       reduce using rule 6 (identifier_list -> IDENTIFIER .)
+    COMMA           reduce using rule 6 (identifier_list -> IDENTIFIER .)
+
+
+state 12
+
+    (10) compound_statement -> BEGIN statement_list . END
+    (12) statement_list -> statement_list . SEMICOLON statement
+
+    END             shift and go to state 23
+    SEMICOLON       shift and go to state 24
+
+
+state 13
+
+    (11) statement_list -> statement .
+
+    END             reduce using rule 11 (statement_list -> statement .)
+    SEMICOLON       reduce using rule 11 (statement_list -> statement .)
+
+
+state 14
+
+    (13) statement -> IDENTIFIER . ASSIGN exp
+
+    ASSIGN          shift and go to state 25
+
+
+state 15
+
+    (14) statement -> IF . exp THEN statement ELSE statement
+    (15) statement -> IF . exp THEN statement
+    (28) exp -> . INTEGER_CONSTANT
+    (29) exp -> . REAL_CONSTANT
+    (30) exp -> . IDENTIFIER
+    (31) exp -> . exp SUM exp
+    (32) exp -> . exp SUB exp
+    (33) exp -> . exp MUL exp
+    (34) exp -> . exp DIV exp
+    (35) exp -> . SUB exp
+    (36) exp -> . exp MOD exp
+    (37) exp -> . exp L exp
+    (38) exp -> . exp E exp
+    (39) exp -> . exp G exp
+    (40) exp -> . exp NE exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp AND exp
+    (44) exp -> . exp OR exp
+    (45) exp -> . NOT exp
+    (46) exp -> . LCB exp RCB
+
+    INTEGER_CONSTANT shift and go to state 27
+    REAL_CONSTANT   shift and go to state 28
+    IDENTIFIER      shift and go to state 29
+    SUB             shift and go to state 30
+    NOT             shift and go to state 31
+    LCB             shift and go to state 32
+
+    exp                            shift and go to state 26
+
+state 16
+
+    (16) statement -> WHILE . exp DO statement
+    (28) exp -> . INTEGER_CONSTANT
+    (29) exp -> . REAL_CONSTANT
+    (30) exp -> . IDENTIFIER
+    (31) exp -> . exp SUM exp
+    (32) exp -> . exp SUB exp
+    (33) exp -> . exp MUL exp
+    (34) exp -> . exp DIV exp
+    (35) exp -> . SUB exp
+    (36) exp -> . exp MOD exp
+    (37) exp -> . exp L exp
+    (38) exp -> . exp E exp
+    (39) exp -> . exp G exp
+    (40) exp -> . exp NE exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp AND exp
+    (44) exp -> . exp OR exp
+    (45) exp -> . NOT exp
+    (46) exp -> . LCB exp RCB
+
+    INTEGER_CONSTANT shift and go to state 27
+    REAL_CONSTANT   shift and go to state 28
+    IDENTIFIER      shift and go to state 29
+    SUB             shift and go to state 30
+    NOT             shift and go to state 31
+    LCB             shift and go to state 32
+
+    exp                            shift and go to state 33
+
+state 17
+
+    (17) statement -> compound_statement .
+
+    END             reduce using rule 17 (statement -> compound_statement .)
+    SEMICOLON       reduce using rule 17 (statement -> compound_statement .)
+    ELSE            reduce using rule 17 (statement -> compound_statement .)
+
+
+state 18
+
+    (18) statement -> PRINT . LCB exp RCB
+
+    LCB             shift and go to state 34
+
+
+state 19
+
+    (19) statement -> SWITCH . exp OF cases default_case DONE
+    (28) exp -> . INTEGER_CONSTANT
+    (29) exp -> . REAL_CONSTANT
+    (30) exp -> . IDENTIFIER
+    (31) exp -> . exp SUM exp
+    (32) exp -> . exp SUB exp
+    (33) exp -> . exp MUL exp
+    (34) exp -> . exp DIV exp
+    (35) exp -> . SUB exp
+    (36) exp -> . exp MOD exp
+    (37) exp -> . exp L exp
+    (38) exp -> . exp E exp
+    (39) exp -> . exp G exp
+    (40) exp -> . exp NE exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp AND exp
+    (44) exp -> . exp OR exp
+    (45) exp -> . NOT exp
+    (46) exp -> . LCB exp RCB
+
+    INTEGER_CONSTANT shift and go to state 27
+    REAL_CONSTANT   shift and go to state 28
+    IDENTIFIER      shift and go to state 29
+    SUB             shift and go to state 30
+    NOT             shift and go to state 31
+    LCB             shift and go to state 32
+
+    exp                            shift and go to state 35
+
+state 20
+
+    (5) declaration_list -> declaration_list SEMICOLON . identifier_list DOUBLEDOT type
+    (6) identifier_list -> . IDENTIFIER
+    (7) identifier_list -> . identifier_list COMMA IDENTIFIER
+
+    IDENTIFIER      shift and go to state 11
+
+    identifier_list                shift and go to state 36
+
+state 21
+
+    (4) declaration_list -> identifier_list DOUBLEDOT . type
+    (8) type -> . INTEGER
+    (9) type -> . REAL
+
+    INTEGER         shift and go to state 38
+    REAL            shift and go to state 39
+
+    type                           shift and go to state 37
+
+state 22
+
+    (7) identifier_list -> identifier_list COMMA . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 40
+
+
+state 23
+
+    (10) compound_statement -> BEGIN statement_list END .
+
+    $end            reduce using rule 10 (compound_statement -> BEGIN statement_list END .)
+    END             reduce using rule 10 (compound_statement -> BEGIN statement_list END .)
+    SEMICOLON       reduce using rule 10 (compound_statement -> BEGIN statement_list END .)
+    ELSE            reduce using rule 10 (compound_statement -> BEGIN statement_list END .)
+
+
+state 24
+
+    (12) statement_list -> statement_list SEMICOLON . statement
+    (13) statement -> . IDENTIFIER ASSIGN exp
+    (14) statement -> . IF exp THEN statement ELSE statement
+    (15) statement -> . IF exp THEN statement
+    (16) statement -> . WHILE exp DO statement
+    (17) statement -> . compound_statement
+    (18) statement -> . PRINT LCB exp RCB
+    (19) statement -> . SWITCH exp OF cases default_case DONE
+    (10) compound_statement -> . BEGIN statement_list END
+
+    IDENTIFIER      shift and go to state 14
+    IF              shift and go to state 15
+    WHILE           shift and go to state 16
+    PRINT           shift and go to state 18
+    SWITCH          shift and go to state 19
+    BEGIN           shift and go to state 8
+
+    statement                      shift and go to state 41
+    compound_statement             shift and go to state 17
+
+state 25
+
+    (13) statement -> IDENTIFIER ASSIGN . exp
+    (28) exp -> . INTEGER_CONSTANT
+    (29) exp -> . REAL_CONSTANT
+    (30) exp -> . IDENTIFIER
+    (31) exp -> . exp SUM exp
+    (32) exp -> . exp SUB exp
+    (33) exp -> . exp MUL exp
+    (34) exp -> . exp DIV exp
+    (35) exp -> . SUB exp
+    (36) exp -> . exp MOD exp
+    (37) exp -> . exp L exp
+    (38) exp -> . exp E exp
+    (39) exp -> . exp G exp
+    (40) exp -> . exp NE exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp AND exp
+    (44) exp -> . exp OR exp
+    (45) exp -> . NOT exp
+    (46) exp -> . LCB exp RCB
+
+    INTEGER_CONSTANT shift and go to state 27
+    REAL_CONSTANT   shift and go to state 28
+    IDENTIFIER      shift and go to state 29
+    SUB             shift and go to state 30
+    NOT             shift and go to state 31
+    LCB             shift and go to state 32
+
+    exp                            shift and go to state 42
+
+state 26
+
+    (14) statement -> IF exp . THEN statement ELSE statement
+    (15) statement -> IF exp . THEN statement
+    (31) exp -> exp . SUM exp
+    (32) exp -> exp . SUB exp
+    (33) exp -> exp . MUL exp
+    (34) exp -> exp . DIV exp
+    (36) exp -> exp . MOD exp
+    (37) exp -> exp . L exp
+    (38) exp -> exp . E exp
+    (39) exp -> exp . G exp
+    (40) exp -> exp . NE exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . AND exp
+    (44) exp -> exp . OR exp
+
+    THEN            shift and go to state 43
+    SUM             shift and go to state 44
+    SUB             shift and go to state 45
+    MUL             shift and go to state 46
+    DIV             shift and go to state 47
+    MOD             shift and go to state 48
+    L               shift and go to state 49
+    E               shift and go to state 50
+    G               shift and go to state 51
+    NE              shift and go to state 52
+    LE              shift and go to state 53
+    GE              shift and go to state 54
+    AND             shift and go to state 55
+    OR              shift and go to state 56
+
+
+state 27
+
+    (28) exp -> INTEGER_CONSTANT .
+
+    THEN            reduce using rule 28 (exp -> INTEGER_CONSTANT .)
+    SUM             reduce using rule 28 (exp -> INTEGER_CONSTANT .)
+    SUB             reduce using rule 28 (exp -> INTEGER_CONSTANT .)
+    MUL             reduce using rule 28 (exp -> INTEGER_CONSTANT .)
+    DIV             reduce using rule 28 (exp -> INTEGER_CONSTANT .)
+    MOD             reduce using rule 28 (exp -> INTEGER_CONSTANT .)
+    L               reduce using rule 28 (exp -> INTEGER_CONSTANT .)
+    E               reduce using rule 28 (exp -> INTEGER_CONSTANT .)
+    G               reduce using rule 28 (exp -> INTEGER_CONSTANT .)
+    NE              reduce using rule 28 (exp -> INTEGER_CONSTANT .)
+    LE              reduce using rule 28 (exp -> INTEGER_CONSTANT .)
+    GE              reduce using rule 28 (exp -> INTEGER_CONSTANT .)
+    AND             reduce using rule 28 (exp -> INTEGER_CONSTANT .)
+    OR              reduce using rule 28 (exp -> INTEGER_CONSTANT .)
+    DO              reduce using rule 28 (exp -> INTEGER_CONSTANT .)
+    OF              reduce using rule 28 (exp -> INTEGER_CONSTANT .)
+    END             reduce using rule 28 (exp -> INTEGER_CONSTANT .)
+    SEMICOLON       reduce using rule 28 (exp -> INTEGER_CONSTANT .)
+    ELSE            reduce using rule 28 (exp -> INTEGER_CONSTANT .)
+    RCB             reduce using rule 28 (exp -> INTEGER_CONSTANT .)
+
+
+state 28
+
+    (29) exp -> REAL_CONSTANT .
+
+    THEN            reduce using rule 29 (exp -> REAL_CONSTANT .)
+    SUM             reduce using rule 29 (exp -> REAL_CONSTANT .)
+    SUB             reduce using rule 29 (exp -> REAL_CONSTANT .)
+    MUL             reduce using rule 29 (exp -> REAL_CONSTANT .)
+    DIV             reduce using rule 29 (exp -> REAL_CONSTANT .)
+    MOD             reduce using rule 29 (exp -> REAL_CONSTANT .)
+    L               reduce using rule 29 (exp -> REAL_CONSTANT .)
+    E               reduce using rule 29 (exp -> REAL_CONSTANT .)
+    G               reduce using rule 29 (exp -> REAL_CONSTANT .)
+    NE              reduce using rule 29 (exp -> REAL_CONSTANT .)
+    LE              reduce using rule 29 (exp -> REAL_CONSTANT .)
+    GE              reduce using rule 29 (exp -> REAL_CONSTANT .)
+    AND             reduce using rule 29 (exp -> REAL_CONSTANT .)
+    OR              reduce using rule 29 (exp -> REAL_CONSTANT .)
+    DO              reduce using rule 29 (exp -> REAL_CONSTANT .)
+    OF              reduce using rule 29 (exp -> REAL_CONSTANT .)
+    END             reduce using rule 29 (exp -> REAL_CONSTANT .)
+    SEMICOLON       reduce using rule 29 (exp -> REAL_CONSTANT .)
+    ELSE            reduce using rule 29 (exp -> REAL_CONSTANT .)
+    RCB             reduce using rule 29 (exp -> REAL_CONSTANT .)
+
+
+state 29
+
+    (30) exp -> IDENTIFIER .
+
+    THEN            reduce using rule 30 (exp -> IDENTIFIER .)
+    SUM             reduce using rule 30 (exp -> IDENTIFIER .)
+    SUB             reduce using rule 30 (exp -> IDENTIFIER .)
+    MUL             reduce using rule 30 (exp -> IDENTIFIER .)
+    DIV             reduce using rule 30 (exp -> IDENTIFIER .)
+    MOD             reduce using rule 30 (exp -> IDENTIFIER .)
+    L               reduce using rule 30 (exp -> IDENTIFIER .)
+    E               reduce using rule 30 (exp -> IDENTIFIER .)
+    G               reduce using rule 30 (exp -> IDENTIFIER .)
+    NE              reduce using rule 30 (exp -> IDENTIFIER .)
+    LE              reduce using rule 30 (exp -> IDENTIFIER .)
+    GE              reduce using rule 30 (exp -> IDENTIFIER .)
+    AND             reduce using rule 30 (exp -> IDENTIFIER .)
+    OR              reduce using rule 30 (exp -> IDENTIFIER .)
+    DO              reduce using rule 30 (exp -> IDENTIFIER .)
+    OF              reduce using rule 30 (exp -> IDENTIFIER .)
+    END             reduce using rule 30 (exp -> IDENTIFIER .)
+    SEMICOLON       reduce using rule 30 (exp -> IDENTIFIER .)
+    ELSE            reduce using rule 30 (exp -> IDENTIFIER .)
+    RCB             reduce using rule 30 (exp -> IDENTIFIER .)
+
+
+state 30
+
+    (35) exp -> SUB . exp
+    (28) exp -> . INTEGER_CONSTANT
+    (29) exp -> . REAL_CONSTANT
+    (30) exp -> . IDENTIFIER
+    (31) exp -> . exp SUM exp
+    (32) exp -> . exp SUB exp
+    (33) exp -> . exp MUL exp
+    (34) exp -> . exp DIV exp
+    (35) exp -> . SUB exp
+    (36) exp -> . exp MOD exp
+    (37) exp -> . exp L exp
+    (38) exp -> . exp E exp
+    (39) exp -> . exp G exp
+    (40) exp -> . exp NE exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp AND exp
+    (44) exp -> . exp OR exp
+    (45) exp -> . NOT exp
+    (46) exp -> . LCB exp RCB
+
+    INTEGER_CONSTANT shift and go to state 27
+    REAL_CONSTANT   shift and go to state 28
+    IDENTIFIER      shift and go to state 29
+    SUB             shift and go to state 30
+    NOT             shift and go to state 31
+    LCB             shift and go to state 32
+
+    exp                            shift and go to state 57
+
+state 31
+
+    (45) exp -> NOT . exp
+    (28) exp -> . INTEGER_CONSTANT
+    (29) exp -> . REAL_CONSTANT
+    (30) exp -> . IDENTIFIER
+    (31) exp -> . exp SUM exp
+    (32) exp -> . exp SUB exp
+    (33) exp -> . exp MUL exp
+    (34) exp -> . exp DIV exp
+    (35) exp -> . SUB exp
+    (36) exp -> . exp MOD exp
+    (37) exp -> . exp L exp
+    (38) exp -> . exp E exp
+    (39) exp -> . exp G exp
+    (40) exp -> . exp NE exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp AND exp
+    (44) exp -> . exp OR exp
+    (45) exp -> . NOT exp
+    (46) exp -> . LCB exp RCB
+
+    INTEGER_CONSTANT shift and go to state 27
+    REAL_CONSTANT   shift and go to state 28
+    IDENTIFIER      shift and go to state 29
+    SUB             shift and go to state 30
+    NOT             shift and go to state 31
+    LCB             shift and go to state 32
+
+    exp                            shift and go to state 58
+
+state 32
+
+    (46) exp -> LCB . exp RCB
+    (28) exp -> . INTEGER_CONSTANT
+    (29) exp -> . REAL_CONSTANT
+    (30) exp -> . IDENTIFIER
+    (31) exp -> . exp SUM exp
+    (32) exp -> . exp SUB exp
+    (33) exp -> . exp MUL exp
+    (34) exp -> . exp DIV exp
+    (35) exp -> . SUB exp
+    (36) exp -> . exp MOD exp
+    (37) exp -> . exp L exp
+    (38) exp -> . exp E exp
+    (39) exp -> . exp G exp
+    (40) exp -> . exp NE exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp AND exp
+    (44) exp -> . exp OR exp
+    (45) exp -> . NOT exp
+    (46) exp -> . LCB exp RCB
+
+    INTEGER_CONSTANT shift and go to state 27
+    REAL_CONSTANT   shift and go to state 28
+    IDENTIFIER      shift and go to state 29
+    SUB             shift and go to state 30
+    NOT             shift and go to state 31
+    LCB             shift and go to state 32
+
+    exp                            shift and go to state 59
+
+state 33
+
+    (16) statement -> WHILE exp . DO statement
+    (31) exp -> exp . SUM exp
+    (32) exp -> exp . SUB exp
+    (33) exp -> exp . MUL exp
+    (34) exp -> exp . DIV exp
+    (36) exp -> exp . MOD exp
+    (37) exp -> exp . L exp
+    (38) exp -> exp . E exp
+    (39) exp -> exp . G exp
+    (40) exp -> exp . NE exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . AND exp
+    (44) exp -> exp . OR exp
+
+    DO              shift and go to state 60
+    SUM             shift and go to state 44
+    SUB             shift and go to state 45
+    MUL             shift and go to state 46
+    DIV             shift and go to state 47
+    MOD             shift and go to state 48
+    L               shift and go to state 49
+    E               shift and go to state 50
+    G               shift and go to state 51
+    NE              shift and go to state 52
+    LE              shift and go to state 53
+    GE              shift and go to state 54
+    AND             shift and go to state 55
+    OR              shift and go to state 56
+
+
+state 34
+
+    (18) statement -> PRINT LCB . exp RCB
+    (28) exp -> . INTEGER_CONSTANT
+    (29) exp -> . REAL_CONSTANT
+    (30) exp -> . IDENTIFIER
+    (31) exp -> . exp SUM exp
+    (32) exp -> . exp SUB exp
+    (33) exp -> . exp MUL exp
+    (34) exp -> . exp DIV exp
+    (35) exp -> . SUB exp
+    (36) exp -> . exp MOD exp
+    (37) exp -> . exp L exp
+    (38) exp -> . exp E exp
+    (39) exp -> . exp G exp
+    (40) exp -> . exp NE exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp AND exp
+    (44) exp -> . exp OR exp
+    (45) exp -> . NOT exp
+    (46) exp -> . LCB exp RCB
+
+    INTEGER_CONSTANT shift and go to state 27
+    REAL_CONSTANT   shift and go to state 28
+    IDENTIFIER      shift and go to state 29
+    SUB             shift and go to state 30
+    NOT             shift and go to state 31
+    LCB             shift and go to state 32
+
+    exp                            shift and go to state 61
+
+state 35
+
+    (19) statement -> SWITCH exp . OF cases default_case DONE
+    (31) exp -> exp . SUM exp
+    (32) exp -> exp . SUB exp
+    (33) exp -> exp . MUL exp
+    (34) exp -> exp . DIV exp
+    (36) exp -> exp . MOD exp
+    (37) exp -> exp . L exp
+    (38) exp -> exp . E exp
+    (39) exp -> exp . G exp
+    (40) exp -> exp . NE exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . AND exp
+    (44) exp -> exp . OR exp
+
+    OF              shift and go to state 62
+    SUM             shift and go to state 44
+    SUB             shift and go to state 45
+    MUL             shift and go to state 46
+    DIV             shift and go to state 47
+    MOD             shift and go to state 48
+    L               shift and go to state 49
+    E               shift and go to state 50
+    G               shift and go to state 51
+    NE              shift and go to state 52
+    LE              shift and go to state 53
+    GE              shift and go to state 54
+    AND             shift and go to state 55
+    OR              shift and go to state 56
+
+
+state 36
+
+    (5) declaration_list -> declaration_list SEMICOLON identifier_list . DOUBLEDOT type
+    (7) identifier_list -> identifier_list . COMMA IDENTIFIER
+
+    DOUBLEDOT       shift and go to state 63
+    COMMA           shift and go to state 22
+
+
+state 37
+
+    (4) declaration_list -> identifier_list DOUBLEDOT type .
+
+    SEMICOLON       reduce using rule 4 (declaration_list -> identifier_list DOUBLEDOT type .)
+    BEGIN           reduce using rule 4 (declaration_list -> identifier_list DOUBLEDOT type .)
+
+
+state 38
+
+    (8) type -> INTEGER .
+
+    SEMICOLON       reduce using rule 8 (type -> INTEGER .)
+    BEGIN           reduce using rule 8 (type -> INTEGER .)
+
+
+state 39
+
+    (9) type -> REAL .
+
+    SEMICOLON       reduce using rule 9 (type -> REAL .)
+    BEGIN           reduce using rule 9 (type -> REAL .)
+
+
+state 40
+
+    (7) identifier_list -> identifier_list COMMA IDENTIFIER .
+
+    DOUBLEDOT       reduce using rule 7 (identifier_list -> identifier_list COMMA IDENTIFIER .)
+    COMMA           reduce using rule 7 (identifier_list -> identifier_list COMMA IDENTIFIER .)
+
+
+state 41
+
+    (12) statement_list -> statement_list SEMICOLON statement .
+
+    END             reduce using rule 12 (statement_list -> statement_list SEMICOLON statement .)
+    SEMICOLON       reduce using rule 12 (statement_list -> statement_list SEMICOLON statement .)
+
+
+state 42
+
+    (13) statement -> IDENTIFIER ASSIGN exp .
+    (31) exp -> exp . SUM exp
+    (32) exp -> exp . SUB exp
+    (33) exp -> exp . MUL exp
+    (34) exp -> exp . DIV exp
+    (36) exp -> exp . MOD exp
+    (37) exp -> exp . L exp
+    (38) exp -> exp . E exp
+    (39) exp -> exp . G exp
+    (40) exp -> exp . NE exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . AND exp
+    (44) exp -> exp . OR exp
+
+    END             reduce using rule 13 (statement -> IDENTIFIER ASSIGN exp .)
+    SEMICOLON       reduce using rule 13 (statement -> IDENTIFIER ASSIGN exp .)
+    ELSE            reduce using rule 13 (statement -> IDENTIFIER ASSIGN exp .)
+    SUM             shift and go to state 44
+    SUB             shift and go to state 45
+    MUL             shift and go to state 46
+    DIV             shift and go to state 47
+    MOD             shift and go to state 48
+    L               shift and go to state 49
+    E               shift and go to state 50
+    G               shift and go to state 51
+    NE              shift and go to state 52
+    LE              shift and go to state 53
+    GE              shift and go to state 54
+    AND             shift and go to state 55
+    OR              shift and go to state 56
+
+
+state 43
+
+    (14) statement -> IF exp THEN . statement ELSE statement
+    (15) statement -> IF exp THEN . statement
+    (13) statement -> . IDENTIFIER ASSIGN exp
+    (14) statement -> . IF exp THEN statement ELSE statement
+    (15) statement -> . IF exp THEN statement
+    (16) statement -> . WHILE exp DO statement
+    (17) statement -> . compound_statement
+    (18) statement -> . PRINT LCB exp RCB
+    (19) statement -> . SWITCH exp OF cases default_case DONE
+    (10) compound_statement -> . BEGIN statement_list END
+
+    IDENTIFIER      shift and go to state 14
+    IF              shift and go to state 15
+    WHILE           shift and go to state 16
+    PRINT           shift and go to state 18
+    SWITCH          shift and go to state 19
+    BEGIN           shift and go to state 8
+
+    statement                      shift and go to state 64
+    compound_statement             shift and go to state 17
+
+state 44
+
+    (31) exp -> exp SUM . exp
+    (28) exp -> . INTEGER_CONSTANT
+    (29) exp -> . REAL_CONSTANT
+    (30) exp -> . IDENTIFIER
+    (31) exp -> . exp SUM exp
+    (32) exp -> . exp SUB exp
+    (33) exp -> . exp MUL exp
+    (34) exp -> . exp DIV exp
+    (35) exp -> . SUB exp
+    (36) exp -> . exp MOD exp
+    (37) exp -> . exp L exp
+    (38) exp -> . exp E exp
+    (39) exp -> . exp G exp
+    (40) exp -> . exp NE exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp AND exp
+    (44) exp -> . exp OR exp
+    (45) exp -> . NOT exp
+    (46) exp -> . LCB exp RCB
+
+    INTEGER_CONSTANT shift and go to state 27
+    REAL_CONSTANT   shift and go to state 28
+    IDENTIFIER      shift and go to state 29
+    SUB             shift and go to state 30
+    NOT             shift and go to state 31
+    LCB             shift and go to state 32
+
+    exp                            shift and go to state 65
+
+state 45
+
+    (32) exp -> exp SUB . exp
+    (28) exp -> . INTEGER_CONSTANT
+    (29) exp -> . REAL_CONSTANT
+    (30) exp -> . IDENTIFIER
+    (31) exp -> . exp SUM exp
+    (32) exp -> . exp SUB exp
+    (33) exp -> . exp MUL exp
+    (34) exp -> . exp DIV exp
+    (35) exp -> . SUB exp
+    (36) exp -> . exp MOD exp
+    (37) exp -> . exp L exp
+    (38) exp -> . exp E exp
+    (39) exp -> . exp G exp
+    (40) exp -> . exp NE exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp AND exp
+    (44) exp -> . exp OR exp
+    (45) exp -> . NOT exp
+    (46) exp -> . LCB exp RCB
+
+    INTEGER_CONSTANT shift and go to state 27
+    REAL_CONSTANT   shift and go to state 28
+    IDENTIFIER      shift and go to state 29
+    SUB             shift and go to state 30
+    NOT             shift and go to state 31
+    LCB             shift and go to state 32
+
+    exp                            shift and go to state 66
+
+state 46
+
+    (33) exp -> exp MUL . exp
+    (28) exp -> . INTEGER_CONSTANT
+    (29) exp -> . REAL_CONSTANT
+    (30) exp -> . IDENTIFIER
+    (31) exp -> . exp SUM exp
+    (32) exp -> . exp SUB exp
+    (33) exp -> . exp MUL exp
+    (34) exp -> . exp DIV exp
+    (35) exp -> . SUB exp
+    (36) exp -> . exp MOD exp
+    (37) exp -> . exp L exp
+    (38) exp -> . exp E exp
+    (39) exp -> . exp G exp
+    (40) exp -> . exp NE exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp AND exp
+    (44) exp -> . exp OR exp
+    (45) exp -> . NOT exp
+    (46) exp -> . LCB exp RCB
+
+    INTEGER_CONSTANT shift and go to state 27
+    REAL_CONSTANT   shift and go to state 28
+    IDENTIFIER      shift and go to state 29
+    SUB             shift and go to state 30
+    NOT             shift and go to state 31
+    LCB             shift and go to state 32
+
+    exp                            shift and go to state 67
+
+state 47
+
+    (34) exp -> exp DIV . exp
+    (28) exp -> . INTEGER_CONSTANT
+    (29) exp -> . REAL_CONSTANT
+    (30) exp -> . IDENTIFIER
+    (31) exp -> . exp SUM exp
+    (32) exp -> . exp SUB exp
+    (33) exp -> . exp MUL exp
+    (34) exp -> . exp DIV exp
+    (35) exp -> . SUB exp
+    (36) exp -> . exp MOD exp
+    (37) exp -> . exp L exp
+    (38) exp -> . exp E exp
+    (39) exp -> . exp G exp
+    (40) exp -> . exp NE exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp AND exp
+    (44) exp -> . exp OR exp
+    (45) exp -> . NOT exp
+    (46) exp -> . LCB exp RCB
+
+    INTEGER_CONSTANT shift and go to state 27
+    REAL_CONSTANT   shift and go to state 28
+    IDENTIFIER      shift and go to state 29
+    SUB             shift and go to state 30
+    NOT             shift and go to state 31
+    LCB             shift and go to state 32
+
+    exp                            shift and go to state 68
+
+state 48
+
+    (36) exp -> exp MOD . exp
+    (28) exp -> . INTEGER_CONSTANT
+    (29) exp -> . REAL_CONSTANT
+    (30) exp -> . IDENTIFIER
+    (31) exp -> . exp SUM exp
+    (32) exp -> . exp SUB exp
+    (33) exp -> . exp MUL exp
+    (34) exp -> . exp DIV exp
+    (35) exp -> . SUB exp
+    (36) exp -> . exp MOD exp
+    (37) exp -> . exp L exp
+    (38) exp -> . exp E exp
+    (39) exp -> . exp G exp
+    (40) exp -> . exp NE exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp AND exp
+    (44) exp -> . exp OR exp
+    (45) exp -> . NOT exp
+    (46) exp -> . LCB exp RCB
+
+    INTEGER_CONSTANT shift and go to state 27
+    REAL_CONSTANT   shift and go to state 28
+    IDENTIFIER      shift and go to state 29
+    SUB             shift and go to state 30
+    NOT             shift and go to state 31
+    LCB             shift and go to state 32
+
+    exp                            shift and go to state 69
+
+state 49
+
+    (37) exp -> exp L . exp
+    (28) exp -> . INTEGER_CONSTANT
+    (29) exp -> . REAL_CONSTANT
+    (30) exp -> . IDENTIFIER
+    (31) exp -> . exp SUM exp
+    (32) exp -> . exp SUB exp
+    (33) exp -> . exp MUL exp
+    (34) exp -> . exp DIV exp
+    (35) exp -> . SUB exp
+    (36) exp -> . exp MOD exp
+    (37) exp -> . exp L exp
+    (38) exp -> . exp E exp
+    (39) exp -> . exp G exp
+    (40) exp -> . exp NE exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp AND exp
+    (44) exp -> . exp OR exp
+    (45) exp -> . NOT exp
+    (46) exp -> . LCB exp RCB
+
+    INTEGER_CONSTANT shift and go to state 27
+    REAL_CONSTANT   shift and go to state 28
+    IDENTIFIER      shift and go to state 29
+    SUB             shift and go to state 30
+    NOT             shift and go to state 31
+    LCB             shift and go to state 32
+
+    exp                            shift and go to state 70
+
+state 50
+
+    (38) exp -> exp E . exp
+    (28) exp -> . INTEGER_CONSTANT
+    (29) exp -> . REAL_CONSTANT
+    (30) exp -> . IDENTIFIER
+    (31) exp -> . exp SUM exp
+    (32) exp -> . exp SUB exp
+    (33) exp -> . exp MUL exp
+    (34) exp -> . exp DIV exp
+    (35) exp -> . SUB exp
+    (36) exp -> . exp MOD exp
+    (37) exp -> . exp L exp
+    (38) exp -> . exp E exp
+    (39) exp -> . exp G exp
+    (40) exp -> . exp NE exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp AND exp
+    (44) exp -> . exp OR exp
+    (45) exp -> . NOT exp
+    (46) exp -> . LCB exp RCB
+
+    INTEGER_CONSTANT shift and go to state 27
+    REAL_CONSTANT   shift and go to state 28
+    IDENTIFIER      shift and go to state 29
+    SUB             shift and go to state 30
+    NOT             shift and go to state 31
+    LCB             shift and go to state 32
+
+    exp                            shift and go to state 71
+
+state 51
+
+    (39) exp -> exp G . exp
+    (28) exp -> . INTEGER_CONSTANT
+    (29) exp -> . REAL_CONSTANT
+    (30) exp -> . IDENTIFIER
+    (31) exp -> . exp SUM exp
+    (32) exp -> . exp SUB exp
+    (33) exp -> . exp MUL exp
+    (34) exp -> . exp DIV exp
+    (35) exp -> . SUB exp
+    (36) exp -> . exp MOD exp
+    (37) exp -> . exp L exp
+    (38) exp -> . exp E exp
+    (39) exp -> . exp G exp
+    (40) exp -> . exp NE exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp AND exp
+    (44) exp -> . exp OR exp
+    (45) exp -> . NOT exp
+    (46) exp -> . LCB exp RCB
+
+    INTEGER_CONSTANT shift and go to state 27
+    REAL_CONSTANT   shift and go to state 28
+    IDENTIFIER      shift and go to state 29
+    SUB             shift and go to state 30
+    NOT             shift and go to state 31
+    LCB             shift and go to state 32
+
+    exp                            shift and go to state 72
+
+state 52
+
+    (40) exp -> exp NE . exp
+    (28) exp -> . INTEGER_CONSTANT
+    (29) exp -> . REAL_CONSTANT
+    (30) exp -> . IDENTIFIER
+    (31) exp -> . exp SUM exp
+    (32) exp -> . exp SUB exp
+    (33) exp -> . exp MUL exp
+    (34) exp -> . exp DIV exp
+    (35) exp -> . SUB exp
+    (36) exp -> . exp MOD exp
+    (37) exp -> . exp L exp
+    (38) exp -> . exp E exp
+    (39) exp -> . exp G exp
+    (40) exp -> . exp NE exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp AND exp
+    (44) exp -> . exp OR exp
+    (45) exp -> . NOT exp
+    (46) exp -> . LCB exp RCB
+
+    INTEGER_CONSTANT shift and go to state 27
+    REAL_CONSTANT   shift and go to state 28
+    IDENTIFIER      shift and go to state 29
+    SUB             shift and go to state 30
+    NOT             shift and go to state 31
+    LCB             shift and go to state 32
+
+    exp                            shift and go to state 73
+
+state 53
+
+    (41) exp -> exp LE . exp
+    (28) exp -> . INTEGER_CONSTANT
+    (29) exp -> . REAL_CONSTANT
+    (30) exp -> . IDENTIFIER
+    (31) exp -> . exp SUM exp
+    (32) exp -> . exp SUB exp
+    (33) exp -> . exp MUL exp
+    (34) exp -> . exp DIV exp
+    (35) exp -> . SUB exp
+    (36) exp -> . exp MOD exp
+    (37) exp -> . exp L exp
+    (38) exp -> . exp E exp
+    (39) exp -> . exp G exp
+    (40) exp -> . exp NE exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp AND exp
+    (44) exp -> . exp OR exp
+    (45) exp -> . NOT exp
+    (46) exp -> . LCB exp RCB
+
+    INTEGER_CONSTANT shift and go to state 27
+    REAL_CONSTANT   shift and go to state 28
+    IDENTIFIER      shift and go to state 29
+    SUB             shift and go to state 30
+    NOT             shift and go to state 31
+    LCB             shift and go to state 32
+
+    exp                            shift and go to state 74
+
+state 54
+
+    (42) exp -> exp GE . exp
+    (28) exp -> . INTEGER_CONSTANT
+    (29) exp -> . REAL_CONSTANT
+    (30) exp -> . IDENTIFIER
+    (31) exp -> . exp SUM exp
+    (32) exp -> . exp SUB exp
+    (33) exp -> . exp MUL exp
+    (34) exp -> . exp DIV exp
+    (35) exp -> . SUB exp
+    (36) exp -> . exp MOD exp
+    (37) exp -> . exp L exp
+    (38) exp -> . exp E exp
+    (39) exp -> . exp G exp
+    (40) exp -> . exp NE exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp AND exp
+    (44) exp -> . exp OR exp
+    (45) exp -> . NOT exp
+    (46) exp -> . LCB exp RCB
+
+    INTEGER_CONSTANT shift and go to state 27
+    REAL_CONSTANT   shift and go to state 28
+    IDENTIFIER      shift and go to state 29
+    SUB             shift and go to state 30
+    NOT             shift and go to state 31
+    LCB             shift and go to state 32
+
+    exp                            shift and go to state 75
+
+state 55
+
+    (43) exp -> exp AND . exp
+    (28) exp -> . INTEGER_CONSTANT
+    (29) exp -> . REAL_CONSTANT
+    (30) exp -> . IDENTIFIER
+    (31) exp -> . exp SUM exp
+    (32) exp -> . exp SUB exp
+    (33) exp -> . exp MUL exp
+    (34) exp -> . exp DIV exp
+    (35) exp -> . SUB exp
+    (36) exp -> . exp MOD exp
+    (37) exp -> . exp L exp
+    (38) exp -> . exp E exp
+    (39) exp -> . exp G exp
+    (40) exp -> . exp NE exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp AND exp
+    (44) exp -> . exp OR exp
+    (45) exp -> . NOT exp
+    (46) exp -> . LCB exp RCB
+
+    INTEGER_CONSTANT shift and go to state 27
+    REAL_CONSTANT   shift and go to state 28
+    IDENTIFIER      shift and go to state 29
+    SUB             shift and go to state 30
+    NOT             shift and go to state 31
+    LCB             shift and go to state 32
+
+    exp                            shift and go to state 76
+
+state 56
+
+    (44) exp -> exp OR . exp
+    (28) exp -> . INTEGER_CONSTANT
+    (29) exp -> . REAL_CONSTANT
+    (30) exp -> . IDENTIFIER
+    (31) exp -> . exp SUM exp
+    (32) exp -> . exp SUB exp
+    (33) exp -> . exp MUL exp
+    (34) exp -> . exp DIV exp
+    (35) exp -> . SUB exp
+    (36) exp -> . exp MOD exp
+    (37) exp -> . exp L exp
+    (38) exp -> . exp E exp
+    (39) exp -> . exp G exp
+    (40) exp -> . exp NE exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp AND exp
+    (44) exp -> . exp OR exp
+    (45) exp -> . NOT exp
+    (46) exp -> . LCB exp RCB
+
+    INTEGER_CONSTANT shift and go to state 27
+    REAL_CONSTANT   shift and go to state 28
+    IDENTIFIER      shift and go to state 29
+    SUB             shift and go to state 30
+    NOT             shift and go to state 31
+    LCB             shift and go to state 32
+
+    exp                            shift and go to state 77
+
+state 57
+
+    (35) exp -> SUB exp .
+    (31) exp -> exp . SUM exp
+    (32) exp -> exp . SUB exp
+    (33) exp -> exp . MUL exp
+    (34) exp -> exp . DIV exp
+    (36) exp -> exp . MOD exp
+    (37) exp -> exp . L exp
+    (38) exp -> exp . E exp
+    (39) exp -> exp . G exp
+    (40) exp -> exp . NE exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . AND exp
+    (44) exp -> exp . OR exp
+
+    THEN            reduce using rule 35 (exp -> SUB exp .)
+    SUM             reduce using rule 35 (exp -> SUB exp .)
+    SUB             reduce using rule 35 (exp -> SUB exp .)
+    L               reduce using rule 35 (exp -> SUB exp .)
+    E               reduce using rule 35 (exp -> SUB exp .)
+    G               reduce using rule 35 (exp -> SUB exp .)
+    NE              reduce using rule 35 (exp -> SUB exp .)
+    LE              reduce using rule 35 (exp -> SUB exp .)
+    GE              reduce using rule 35 (exp -> SUB exp .)
+    AND             reduce using rule 35 (exp -> SUB exp .)
+    OR              reduce using rule 35 (exp -> SUB exp .)
+    DO              reduce using rule 35 (exp -> SUB exp .)
+    OF              reduce using rule 35 (exp -> SUB exp .)
+    END             reduce using rule 35 (exp -> SUB exp .)
+    SEMICOLON       reduce using rule 35 (exp -> SUB exp .)
+    ELSE            reduce using rule 35 (exp -> SUB exp .)
+    RCB             reduce using rule 35 (exp -> SUB exp .)
+    MUL             shift and go to state 46
+    DIV             shift and go to state 47
+    MOD             shift and go to state 48
+
+  ! MUL             [ reduce using rule 35 (exp -> SUB exp .) ]
+  ! DIV             [ reduce using rule 35 (exp -> SUB exp .) ]
+  ! MOD             [ reduce using rule 35 (exp -> SUB exp .) ]
+  ! SUM             [ shift and go to state 44 ]
+  ! SUB             [ shift and go to state 45 ]
+  ! L               [ shift and go to state 49 ]
+  ! E               [ shift and go to state 50 ]
+  ! G               [ shift and go to state 51 ]
+  ! NE              [ shift and go to state 52 ]
+  ! LE              [ shift and go to state 53 ]
+  ! GE              [ shift and go to state 54 ]
+  ! AND             [ shift and go to state 55 ]
+  ! OR              [ shift and go to state 56 ]
+
+
+state 58
+
+    (45) exp -> NOT exp .
+    (31) exp -> exp . SUM exp
+    (32) exp -> exp . SUB exp
+    (33) exp -> exp . MUL exp
+    (34) exp -> exp . DIV exp
+    (36) exp -> exp . MOD exp
+    (37) exp -> exp . L exp
+    (38) exp -> exp . E exp
+    (39) exp -> exp . G exp
+    (40) exp -> exp . NE exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . AND exp
+    (44) exp -> exp . OR exp
+
+    THEN            reduce using rule 45 (exp -> NOT exp .)
+    AND             reduce using rule 45 (exp -> NOT exp .)
+    OR              reduce using rule 45 (exp -> NOT exp .)
+    DO              reduce using rule 45 (exp -> NOT exp .)
+    OF              reduce using rule 45 (exp -> NOT exp .)
+    END             reduce using rule 45 (exp -> NOT exp .)
+    SEMICOLON       reduce using rule 45 (exp -> NOT exp .)
+    ELSE            reduce using rule 45 (exp -> NOT exp .)
+    RCB             reduce using rule 45 (exp -> NOT exp .)
+    SUM             shift and go to state 44
+    SUB             shift and go to state 45
+    MUL             shift and go to state 46
+    DIV             shift and go to state 47
+    MOD             shift and go to state 48
+    L               shift and go to state 49
+    E               shift and go to state 50
+    G               shift and go to state 51
+    NE              shift and go to state 52
+    LE              shift and go to state 53
+    GE              shift and go to state 54
+
+  ! SUM             [ reduce using rule 45 (exp -> NOT exp .) ]
+  ! SUB             [ reduce using rule 45 (exp -> NOT exp .) ]
+  ! MUL             [ reduce using rule 45 (exp -> NOT exp .) ]
+  ! DIV             [ reduce using rule 45 (exp -> NOT exp .) ]
+  ! MOD             [ reduce using rule 45 (exp -> NOT exp .) ]
+  ! L               [ reduce using rule 45 (exp -> NOT exp .) ]
+  ! E               [ reduce using rule 45 (exp -> NOT exp .) ]
+  ! G               [ reduce using rule 45 (exp -> NOT exp .) ]
+  ! NE              [ reduce using rule 45 (exp -> NOT exp .) ]
+  ! LE              [ reduce using rule 45 (exp -> NOT exp .) ]
+  ! GE              [ reduce using rule 45 (exp -> NOT exp .) ]
+  ! AND             [ shift and go to state 55 ]
+  ! OR              [ shift and go to state 56 ]
+
+
+state 59
+
+    (46) exp -> LCB exp . RCB
+    (31) exp -> exp . SUM exp
+    (32) exp -> exp . SUB exp
+    (33) exp -> exp . MUL exp
+    (34) exp -> exp . DIV exp
+    (36) exp -> exp . MOD exp
+    (37) exp -> exp . L exp
+    (38) exp -> exp . E exp
+    (39) exp -> exp . G exp
+    (40) exp -> exp . NE exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . AND exp
+    (44) exp -> exp . OR exp
+
+    RCB             shift and go to state 78
+    SUM             shift and go to state 44
+    SUB             shift and go to state 45
+    MUL             shift and go to state 46
+    DIV             shift and go to state 47
+    MOD             shift and go to state 48
+    L               shift and go to state 49
+    E               shift and go to state 50
+    G               shift and go to state 51
+    NE              shift and go to state 52
+    LE              shift and go to state 53
+    GE              shift and go to state 54
+    AND             shift and go to state 55
+    OR              shift and go to state 56
+
+
+state 60
+
+    (16) statement -> WHILE exp DO . statement
+    (13) statement -> . IDENTIFIER ASSIGN exp
+    (14) statement -> . IF exp THEN statement ELSE statement
+    (15) statement -> . IF exp THEN statement
+    (16) statement -> . WHILE exp DO statement
+    (17) statement -> . compound_statement
+    (18) statement -> . PRINT LCB exp RCB
+    (19) statement -> . SWITCH exp OF cases default_case DONE
+    (10) compound_statement -> . BEGIN statement_list END
+
+    IDENTIFIER      shift and go to state 14
+    IF              shift and go to state 15
+    WHILE           shift and go to state 16
+    PRINT           shift and go to state 18
+    SWITCH          shift and go to state 19
+    BEGIN           shift and go to state 8
+
+    statement                      shift and go to state 79
+    compound_statement             shift and go to state 17
+
+state 61
+
+    (18) statement -> PRINT LCB exp . RCB
+    (31) exp -> exp . SUM exp
+    (32) exp -> exp . SUB exp
+    (33) exp -> exp . MUL exp
+    (34) exp -> exp . DIV exp
+    (36) exp -> exp . MOD exp
+    (37) exp -> exp . L exp
+    (38) exp -> exp . E exp
+    (39) exp -> exp . G exp
+    (40) exp -> exp . NE exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . AND exp
+    (44) exp -> exp . OR exp
+
+    RCB             shift and go to state 80
+    SUM             shift and go to state 44
+    SUB             shift and go to state 45
+    MUL             shift and go to state 46
+    DIV             shift and go to state 47
+    MOD             shift and go to state 48
+    L               shift and go to state 49
+    E               shift and go to state 50
+    G               shift and go to state 51
+    NE              shift and go to state 52
+    LE              shift and go to state 53
+    GE              shift and go to state 54
+    AND             shift and go to state 55
+    OR              shift and go to state 56
+
+
+state 62
+
+    (19) statement -> SWITCH exp OF . cases default_case DONE
+    (22) cases -> . constant_list DOUBLEDOT statement SEMICOLON cases
+    (23) cases -> . empty
+    (24) constant_list -> . constant
+    (25) constant_list -> . constant_list COMMA constant
+    (47) empty -> .
+    (26) constant -> . REAL_CONSTANT
+    (27) constant -> . INTEGER_CONSTANT
+
+    DEFAULT         reduce using rule 47 (empty -> .)
+    DONE            reduce using rule 47 (empty -> .)
+    REAL_CONSTANT   shift and go to state 85
+    INTEGER_CONSTANT shift and go to state 86
+
+    cases                          shift and go to state 81
+    constant_list                  shift and go to state 82
+    empty                          shift and go to state 83
+    constant                       shift and go to state 84
+
+state 63
+
+    (5) declaration_list -> declaration_list SEMICOLON identifier_list DOUBLEDOT . type
+    (8) type -> . INTEGER
+    (9) type -> . REAL
+
+    INTEGER         shift and go to state 38
+    REAL            shift and go to state 39
+
+    type                           shift and go to state 87
+
+state 64
+
+    (14) statement -> IF exp THEN statement . ELSE statement
+    (15) statement -> IF exp THEN statement .
+
+  ! shift/reduce conflict for ELSE resolved as shift
+    ELSE            shift and go to state 88
+    END             reduce using rule 15 (statement -> IF exp THEN statement .)
+    SEMICOLON       reduce using rule 15 (statement -> IF exp THEN statement .)
+
+  ! ELSE            [ reduce using rule 15 (statement -> IF exp THEN statement .) ]
+
+
+state 65
+
+    (31) exp -> exp SUM exp .
+    (31) exp -> exp . SUM exp
+    (32) exp -> exp . SUB exp
+    (33) exp -> exp . MUL exp
+    (34) exp -> exp . DIV exp
+    (36) exp -> exp . MOD exp
+    (37) exp -> exp . L exp
+    (38) exp -> exp . E exp
+    (39) exp -> exp . G exp
+    (40) exp -> exp . NE exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . AND exp
+    (44) exp -> exp . OR exp
+
+    THEN            reduce using rule 31 (exp -> exp SUM exp .)
+    SUM             reduce using rule 31 (exp -> exp SUM exp .)
+    SUB             reduce using rule 31 (exp -> exp SUM exp .)
+    L               reduce using rule 31 (exp -> exp SUM exp .)
+    E               reduce using rule 31 (exp -> exp SUM exp .)
+    G               reduce using rule 31 (exp -> exp SUM exp .)
+    NE              reduce using rule 31 (exp -> exp SUM exp .)
+    LE              reduce using rule 31 (exp -> exp SUM exp .)
+    GE              reduce using rule 31 (exp -> exp SUM exp .)
+    AND             reduce using rule 31 (exp -> exp SUM exp .)
+    OR              reduce using rule 31 (exp -> exp SUM exp .)
+    DO              reduce using rule 31 (exp -> exp SUM exp .)
+    OF              reduce using rule 31 (exp -> exp SUM exp .)
+    END             reduce using rule 31 (exp -> exp SUM exp .)
+    SEMICOLON       reduce using rule 31 (exp -> exp SUM exp .)
+    ELSE            reduce using rule 31 (exp -> exp SUM exp .)
+    RCB             reduce using rule 31 (exp -> exp SUM exp .)
+    MUL             shift and go to state 46
+    DIV             shift and go to state 47
+    MOD             shift and go to state 48
+
+  ! MUL             [ reduce using rule 31 (exp -> exp SUM exp .) ]
+  ! DIV             [ reduce using rule 31 (exp -> exp SUM exp .) ]
+  ! MOD             [ reduce using rule 31 (exp -> exp SUM exp .) ]
+  ! SUM             [ shift and go to state 44 ]
+  ! SUB             [ shift and go to state 45 ]
+  ! L               [ shift and go to state 49 ]
+  ! E               [ shift and go to state 50 ]
+  ! G               [ shift and go to state 51 ]
+  ! NE              [ shift and go to state 52 ]
+  ! LE              [ shift and go to state 53 ]
+  ! GE              [ shift and go to state 54 ]
+  ! AND             [ shift and go to state 55 ]
+  ! OR              [ shift and go to state 56 ]
+
+
+state 66
+
+    (32) exp -> exp SUB exp .
+    (31) exp -> exp . SUM exp
+    (32) exp -> exp . SUB exp
+    (33) exp -> exp . MUL exp
+    (34) exp -> exp . DIV exp
+    (36) exp -> exp . MOD exp
+    (37) exp -> exp . L exp
+    (38) exp -> exp . E exp
+    (39) exp -> exp . G exp
+    (40) exp -> exp . NE exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . AND exp
+    (44) exp -> exp . OR exp
+
+    THEN            reduce using rule 32 (exp -> exp SUB exp .)
+    SUM             reduce using rule 32 (exp -> exp SUB exp .)
+    SUB             reduce using rule 32 (exp -> exp SUB exp .)
+    L               reduce using rule 32 (exp -> exp SUB exp .)
+    E               reduce using rule 32 (exp -> exp SUB exp .)
+    G               reduce using rule 32 (exp -> exp SUB exp .)
+    NE              reduce using rule 32 (exp -> exp SUB exp .)
+    LE              reduce using rule 32 (exp -> exp SUB exp .)
+    GE              reduce using rule 32 (exp -> exp SUB exp .)
+    AND             reduce using rule 32 (exp -> exp SUB exp .)
+    OR              reduce using rule 32 (exp -> exp SUB exp .)
+    DO              reduce using rule 32 (exp -> exp SUB exp .)
+    OF              reduce using rule 32 (exp -> exp SUB exp .)
+    END             reduce using rule 32 (exp -> exp SUB exp .)
+    SEMICOLON       reduce using rule 32 (exp -> exp SUB exp .)
+    ELSE            reduce using rule 32 (exp -> exp SUB exp .)
+    RCB             reduce using rule 32 (exp -> exp SUB exp .)
+    MUL             shift and go to state 46
+    DIV             shift and go to state 47
+    MOD             shift and go to state 48
+
+  ! MUL             [ reduce using rule 32 (exp -> exp SUB exp .) ]
+  ! DIV             [ reduce using rule 32 (exp -> exp SUB exp .) ]
+  ! MOD             [ reduce using rule 32 (exp -> exp SUB exp .) ]
+  ! SUM             [ shift and go to state 44 ]
+  ! SUB             [ shift and go to state 45 ]
+  ! L               [ shift and go to state 49 ]
+  ! E               [ shift and go to state 50 ]
+  ! G               [ shift and go to state 51 ]
+  ! NE              [ shift and go to state 52 ]
+  ! LE              [ shift and go to state 53 ]
+  ! GE              [ shift and go to state 54 ]
+  ! AND             [ shift and go to state 55 ]
+  ! OR              [ shift and go to state 56 ]
+
+
+state 67
+
+    (33) exp -> exp MUL exp .
+    (31) exp -> exp . SUM exp
+    (32) exp -> exp . SUB exp
+    (33) exp -> exp . MUL exp
+    (34) exp -> exp . DIV exp
+    (36) exp -> exp . MOD exp
+    (37) exp -> exp . L exp
+    (38) exp -> exp . E exp
+    (39) exp -> exp . G exp
+    (40) exp -> exp . NE exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . AND exp
+    (44) exp -> exp . OR exp
+
+    THEN            reduce using rule 33 (exp -> exp MUL exp .)
+    SUM             reduce using rule 33 (exp -> exp MUL exp .)
+    SUB             reduce using rule 33 (exp -> exp MUL exp .)
+    MUL             reduce using rule 33 (exp -> exp MUL exp .)
+    DIV             reduce using rule 33 (exp -> exp MUL exp .)
+    MOD             reduce using rule 33 (exp -> exp MUL exp .)
+    L               reduce using rule 33 (exp -> exp MUL exp .)
+    E               reduce using rule 33 (exp -> exp MUL exp .)
+    G               reduce using rule 33 (exp -> exp MUL exp .)
+    NE              reduce using rule 33 (exp -> exp MUL exp .)
+    LE              reduce using rule 33 (exp -> exp MUL exp .)
+    GE              reduce using rule 33 (exp -> exp MUL exp .)
+    AND             reduce using rule 33 (exp -> exp MUL exp .)
+    OR              reduce using rule 33 (exp -> exp MUL exp .)
+    DO              reduce using rule 33 (exp -> exp MUL exp .)
+    OF              reduce using rule 33 (exp -> exp MUL exp .)
+    END             reduce using rule 33 (exp -> exp MUL exp .)
+    SEMICOLON       reduce using rule 33 (exp -> exp MUL exp .)
+    ELSE            reduce using rule 33 (exp -> exp MUL exp .)
+    RCB             reduce using rule 33 (exp -> exp MUL exp .)
+
+  ! SUM             [ shift and go to state 44 ]
+  ! SUB             [ shift and go to state 45 ]
+  ! MUL             [ shift and go to state 46 ]
+  ! DIV             [ shift and go to state 47 ]
+  ! MOD             [ shift and go to state 48 ]
+  ! L               [ shift and go to state 49 ]
+  ! E               [ shift and go to state 50 ]
+  ! G               [ shift and go to state 51 ]
+  ! NE              [ shift and go to state 52 ]
+  ! LE              [ shift and go to state 53 ]
+  ! GE              [ shift and go to state 54 ]
+  ! AND             [ shift and go to state 55 ]
+  ! OR              [ shift and go to state 56 ]
+
+
+state 68
+
+    (34) exp -> exp DIV exp .
+    (31) exp -> exp . SUM exp
+    (32) exp -> exp . SUB exp
+    (33) exp -> exp . MUL exp
+    (34) exp -> exp . DIV exp
+    (36) exp -> exp . MOD exp
+    (37) exp -> exp . L exp
+    (38) exp -> exp . E exp
+    (39) exp -> exp . G exp
+    (40) exp -> exp . NE exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . AND exp
+    (44) exp -> exp . OR exp
+
+    THEN            reduce using rule 34 (exp -> exp DIV exp .)
+    SUM             reduce using rule 34 (exp -> exp DIV exp .)
+    SUB             reduce using rule 34 (exp -> exp DIV exp .)
+    MUL             reduce using rule 34 (exp -> exp DIV exp .)
+    DIV             reduce using rule 34 (exp -> exp DIV exp .)
+    MOD             reduce using rule 34 (exp -> exp DIV exp .)
+    L               reduce using rule 34 (exp -> exp DIV exp .)
+    E               reduce using rule 34 (exp -> exp DIV exp .)
+    G               reduce using rule 34 (exp -> exp DIV exp .)
+    NE              reduce using rule 34 (exp -> exp DIV exp .)
+    LE              reduce using rule 34 (exp -> exp DIV exp .)
+    GE              reduce using rule 34 (exp -> exp DIV exp .)
+    AND             reduce using rule 34 (exp -> exp DIV exp .)
+    OR              reduce using rule 34 (exp -> exp DIV exp .)
+    DO              reduce using rule 34 (exp -> exp DIV exp .)
+    OF              reduce using rule 34 (exp -> exp DIV exp .)
+    END             reduce using rule 34 (exp -> exp DIV exp .)
+    SEMICOLON       reduce using rule 34 (exp -> exp DIV exp .)
+    ELSE            reduce using rule 34 (exp -> exp DIV exp .)
+    RCB             reduce using rule 34 (exp -> exp DIV exp .)
+
+  ! SUM             [ shift and go to state 44 ]
+  ! SUB             [ shift and go to state 45 ]
+  ! MUL             [ shift and go to state 46 ]
+  ! DIV             [ shift and go to state 47 ]
+  ! MOD             [ shift and go to state 48 ]
+  ! L               [ shift and go to state 49 ]
+  ! E               [ shift and go to state 50 ]
+  ! G               [ shift and go to state 51 ]
+  ! NE              [ shift and go to state 52 ]
+  ! LE              [ shift and go to state 53 ]
+  ! GE              [ shift and go to state 54 ]
+  ! AND             [ shift and go to state 55 ]
+  ! OR              [ shift and go to state 56 ]
+
+
+state 69
+
+    (36) exp -> exp MOD exp .
+    (31) exp -> exp . SUM exp
+    (32) exp -> exp . SUB exp
+    (33) exp -> exp . MUL exp
+    (34) exp -> exp . DIV exp
+    (36) exp -> exp . MOD exp
+    (37) exp -> exp . L exp
+    (38) exp -> exp . E exp
+    (39) exp -> exp . G exp
+    (40) exp -> exp . NE exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . AND exp
+    (44) exp -> exp . OR exp
+
+    THEN            reduce using rule 36 (exp -> exp MOD exp .)
+    SUM             reduce using rule 36 (exp -> exp MOD exp .)
+    SUB             reduce using rule 36 (exp -> exp MOD exp .)
+    MUL             reduce using rule 36 (exp -> exp MOD exp .)
+    DIV             reduce using rule 36 (exp -> exp MOD exp .)
+    MOD             reduce using rule 36 (exp -> exp MOD exp .)
+    L               reduce using rule 36 (exp -> exp MOD exp .)
+    E               reduce using rule 36 (exp -> exp MOD exp .)
+    G               reduce using rule 36 (exp -> exp MOD exp .)
+    NE              reduce using rule 36 (exp -> exp MOD exp .)
+    LE              reduce using rule 36 (exp -> exp MOD exp .)
+    GE              reduce using rule 36 (exp -> exp MOD exp .)
+    AND             reduce using rule 36 (exp -> exp MOD exp .)
+    OR              reduce using rule 36 (exp -> exp MOD exp .)
+    DO              reduce using rule 36 (exp -> exp MOD exp .)
+    OF              reduce using rule 36 (exp -> exp MOD exp .)
+    END             reduce using rule 36 (exp -> exp MOD exp .)
+    SEMICOLON       reduce using rule 36 (exp -> exp MOD exp .)
+    ELSE            reduce using rule 36 (exp -> exp MOD exp .)
+    RCB             reduce using rule 36 (exp -> exp MOD exp .)
+
+  ! SUM             [ shift and go to state 44 ]
+  ! SUB             [ shift and go to state 45 ]
+  ! MUL             [ shift and go to state 46 ]
+  ! DIV             [ shift and go to state 47 ]
+  ! MOD             [ shift and go to state 48 ]
+  ! L               [ shift and go to state 49 ]
+  ! E               [ shift and go to state 50 ]
+  ! G               [ shift and go to state 51 ]
+  ! NE              [ shift and go to state 52 ]
+  ! LE              [ shift and go to state 53 ]
+  ! GE              [ shift and go to state 54 ]
+  ! AND             [ shift and go to state 55 ]
+  ! OR              [ shift and go to state 56 ]
+
+
+state 70
+
+    (37) exp -> exp L exp .
+    (31) exp -> exp . SUM exp
+    (32) exp -> exp . SUB exp
+    (33) exp -> exp . MUL exp
+    (34) exp -> exp . DIV exp
+    (36) exp -> exp . MOD exp
+    (37) exp -> exp . L exp
+    (38) exp -> exp . E exp
+    (39) exp -> exp . G exp
+    (40) exp -> exp . NE exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . AND exp
+    (44) exp -> exp . OR exp
+
+    THEN            reduce using rule 37 (exp -> exp L exp .)
+    L               reduce using rule 37 (exp -> exp L exp .)
+    E               reduce using rule 37 (exp -> exp L exp .)
+    G               reduce using rule 37 (exp -> exp L exp .)
+    NE              reduce using rule 37 (exp -> exp L exp .)
+    LE              reduce using rule 37 (exp -> exp L exp .)
+    GE              reduce using rule 37 (exp -> exp L exp .)
+    AND             reduce using rule 37 (exp -> exp L exp .)
+    OR              reduce using rule 37 (exp -> exp L exp .)
+    DO              reduce using rule 37 (exp -> exp L exp .)
+    OF              reduce using rule 37 (exp -> exp L exp .)
+    END             reduce using rule 37 (exp -> exp L exp .)
+    SEMICOLON       reduce using rule 37 (exp -> exp L exp .)
+    ELSE            reduce using rule 37 (exp -> exp L exp .)
+    RCB             reduce using rule 37 (exp -> exp L exp .)
+    SUM             shift and go to state 44
+    SUB             shift and go to state 45
+    MUL             shift and go to state 46
+    DIV             shift and go to state 47
+    MOD             shift and go to state 48
+
+  ! SUM             [ reduce using rule 37 (exp -> exp L exp .) ]
+  ! SUB             [ reduce using rule 37 (exp -> exp L exp .) ]
+  ! MUL             [ reduce using rule 37 (exp -> exp L exp .) ]
+  ! DIV             [ reduce using rule 37 (exp -> exp L exp .) ]
+  ! MOD             [ reduce using rule 37 (exp -> exp L exp .) ]
+  ! L               [ shift and go to state 49 ]
+  ! E               [ shift and go to state 50 ]
+  ! G               [ shift and go to state 51 ]
+  ! NE              [ shift and go to state 52 ]
+  ! LE              [ shift and go to state 53 ]
+  ! GE              [ shift and go to state 54 ]
+  ! AND             [ shift and go to state 55 ]
+  ! OR              [ shift and go to state 56 ]
+
+
+state 71
+
+    (38) exp -> exp E exp .
+    (31) exp -> exp . SUM exp
+    (32) exp -> exp . SUB exp
+    (33) exp -> exp . MUL exp
+    (34) exp -> exp . DIV exp
+    (36) exp -> exp . MOD exp
+    (37) exp -> exp . L exp
+    (38) exp -> exp . E exp
+    (39) exp -> exp . G exp
+    (40) exp -> exp . NE exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . AND exp
+    (44) exp -> exp . OR exp
+
+    THEN            reduce using rule 38 (exp -> exp E exp .)
+    L               reduce using rule 38 (exp -> exp E exp .)
+    E               reduce using rule 38 (exp -> exp E exp .)
+    G               reduce using rule 38 (exp -> exp E exp .)
+    NE              reduce using rule 38 (exp -> exp E exp .)
+    LE              reduce using rule 38 (exp -> exp E exp .)
+    GE              reduce using rule 38 (exp -> exp E exp .)
+    AND             reduce using rule 38 (exp -> exp E exp .)
+    OR              reduce using rule 38 (exp -> exp E exp .)
+    DO              reduce using rule 38 (exp -> exp E exp .)
+    OF              reduce using rule 38 (exp -> exp E exp .)
+    END             reduce using rule 38 (exp -> exp E exp .)
+    SEMICOLON       reduce using rule 38 (exp -> exp E exp .)
+    ELSE            reduce using rule 38 (exp -> exp E exp .)
+    RCB             reduce using rule 38 (exp -> exp E exp .)
+    SUM             shift and go to state 44
+    SUB             shift and go to state 45
+    MUL             shift and go to state 46
+    DIV             shift and go to state 47
+    MOD             shift and go to state 48
+
+  ! SUM             [ reduce using rule 38 (exp -> exp E exp .) ]
+  ! SUB             [ reduce using rule 38 (exp -> exp E exp .) ]
+  ! MUL             [ reduce using rule 38 (exp -> exp E exp .) ]
+  ! DIV             [ reduce using rule 38 (exp -> exp E exp .) ]
+  ! MOD             [ reduce using rule 38 (exp -> exp E exp .) ]
+  ! L               [ shift and go to state 49 ]
+  ! E               [ shift and go to state 50 ]
+  ! G               [ shift and go to state 51 ]
+  ! NE              [ shift and go to state 52 ]
+  ! LE              [ shift and go to state 53 ]
+  ! GE              [ shift and go to state 54 ]
+  ! AND             [ shift and go to state 55 ]
+  ! OR              [ shift and go to state 56 ]
+
+
+state 72
+
+    (39) exp -> exp G exp .
+    (31) exp -> exp . SUM exp
+    (32) exp -> exp . SUB exp
+    (33) exp -> exp . MUL exp
+    (34) exp -> exp . DIV exp
+    (36) exp -> exp . MOD exp
+    (37) exp -> exp . L exp
+    (38) exp -> exp . E exp
+    (39) exp -> exp . G exp
+    (40) exp -> exp . NE exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . AND exp
+    (44) exp -> exp . OR exp
+
+    THEN            reduce using rule 39 (exp -> exp G exp .)
+    L               reduce using rule 39 (exp -> exp G exp .)
+    E               reduce using rule 39 (exp -> exp G exp .)
+    G               reduce using rule 39 (exp -> exp G exp .)
+    NE              reduce using rule 39 (exp -> exp G exp .)
+    LE              reduce using rule 39 (exp -> exp G exp .)
+    GE              reduce using rule 39 (exp -> exp G exp .)
+    AND             reduce using rule 39 (exp -> exp G exp .)
+    OR              reduce using rule 39 (exp -> exp G exp .)
+    DO              reduce using rule 39 (exp -> exp G exp .)
+    OF              reduce using rule 39 (exp -> exp G exp .)
+    END             reduce using rule 39 (exp -> exp G exp .)
+    SEMICOLON       reduce using rule 39 (exp -> exp G exp .)
+    ELSE            reduce using rule 39 (exp -> exp G exp .)
+    RCB             reduce using rule 39 (exp -> exp G exp .)
+    SUM             shift and go to state 44
+    SUB             shift and go to state 45
+    MUL             shift and go to state 46
+    DIV             shift and go to state 47
+    MOD             shift and go to state 48
+
+  ! SUM             [ reduce using rule 39 (exp -> exp G exp .) ]
+  ! SUB             [ reduce using rule 39 (exp -> exp G exp .) ]
+  ! MUL             [ reduce using rule 39 (exp -> exp G exp .) ]
+  ! DIV             [ reduce using rule 39 (exp -> exp G exp .) ]
+  ! MOD             [ reduce using rule 39 (exp -> exp G exp .) ]
+  ! L               [ shift and go to state 49 ]
+  ! E               [ shift and go to state 50 ]
+  ! G               [ shift and go to state 51 ]
+  ! NE              [ shift and go to state 52 ]
+  ! LE              [ shift and go to state 53 ]
+  ! GE              [ shift and go to state 54 ]
+  ! AND             [ shift and go to state 55 ]
+  ! OR              [ shift and go to state 56 ]
+
+
+state 73
+
+    (40) exp -> exp NE exp .
+    (31) exp -> exp . SUM exp
+    (32) exp -> exp . SUB exp
+    (33) exp -> exp . MUL exp
+    (34) exp -> exp . DIV exp
+    (36) exp -> exp . MOD exp
+    (37) exp -> exp . L exp
+    (38) exp -> exp . E exp
+    (39) exp -> exp . G exp
+    (40) exp -> exp . NE exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . AND exp
+    (44) exp -> exp . OR exp
+
+    THEN            reduce using rule 40 (exp -> exp NE exp .)
+    L               reduce using rule 40 (exp -> exp NE exp .)
+    E               reduce using rule 40 (exp -> exp NE exp .)
+    G               reduce using rule 40 (exp -> exp NE exp .)
+    NE              reduce using rule 40 (exp -> exp NE exp .)
+    LE              reduce using rule 40 (exp -> exp NE exp .)
+    GE              reduce using rule 40 (exp -> exp NE exp .)
+    AND             reduce using rule 40 (exp -> exp NE exp .)
+    OR              reduce using rule 40 (exp -> exp NE exp .)
+    DO              reduce using rule 40 (exp -> exp NE exp .)
+    OF              reduce using rule 40 (exp -> exp NE exp .)
+    END             reduce using rule 40 (exp -> exp NE exp .)
+    SEMICOLON       reduce using rule 40 (exp -> exp NE exp .)
+    ELSE            reduce using rule 40 (exp -> exp NE exp .)
+    RCB             reduce using rule 40 (exp -> exp NE exp .)
+    SUM             shift and go to state 44
+    SUB             shift and go to state 45
+    MUL             shift and go to state 46
+    DIV             shift and go to state 47
+    MOD             shift and go to state 48
+
+  ! SUM             [ reduce using rule 40 (exp -> exp NE exp .) ]
+  ! SUB             [ reduce using rule 40 (exp -> exp NE exp .) ]
+  ! MUL             [ reduce using rule 40 (exp -> exp NE exp .) ]
+  ! DIV             [ reduce using rule 40 (exp -> exp NE exp .) ]
+  ! MOD             [ reduce using rule 40 (exp -> exp NE exp .) ]
+  ! L               [ shift and go to state 49 ]
+  ! E               [ shift and go to state 50 ]
+  ! G               [ shift and go to state 51 ]
+  ! NE              [ shift and go to state 52 ]
+  ! LE              [ shift and go to state 53 ]
+  ! GE              [ shift and go to state 54 ]
+  ! AND             [ shift and go to state 55 ]
+  ! OR              [ shift and go to state 56 ]
+
+
+state 74
+
+    (41) exp -> exp LE exp .
+    (31) exp -> exp . SUM exp
+    (32) exp -> exp . SUB exp
+    (33) exp -> exp . MUL exp
+    (34) exp -> exp . DIV exp
+    (36) exp -> exp . MOD exp
+    (37) exp -> exp . L exp
+    (38) exp -> exp . E exp
+    (39) exp -> exp . G exp
+    (40) exp -> exp . NE exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . AND exp
+    (44) exp -> exp . OR exp
+
+    THEN            reduce using rule 41 (exp -> exp LE exp .)
+    L               reduce using rule 41 (exp -> exp LE exp .)
+    E               reduce using rule 41 (exp -> exp LE exp .)
+    G               reduce using rule 41 (exp -> exp LE exp .)
+    NE              reduce using rule 41 (exp -> exp LE exp .)
+    LE              reduce using rule 41 (exp -> exp LE exp .)
+    GE              reduce using rule 41 (exp -> exp LE exp .)
+    AND             reduce using rule 41 (exp -> exp LE exp .)
+    OR              reduce using rule 41 (exp -> exp LE exp .)
+    DO              reduce using rule 41 (exp -> exp LE exp .)
+    OF              reduce using rule 41 (exp -> exp LE exp .)
+    END             reduce using rule 41 (exp -> exp LE exp .)
+    SEMICOLON       reduce using rule 41 (exp -> exp LE exp .)
+    ELSE            reduce using rule 41 (exp -> exp LE exp .)
+    RCB             reduce using rule 41 (exp -> exp LE exp .)
+    SUM             shift and go to state 44
+    SUB             shift and go to state 45
+    MUL             shift and go to state 46
+    DIV             shift and go to state 47
+    MOD             shift and go to state 48
+
+  ! SUM             [ reduce using rule 41 (exp -> exp LE exp .) ]
+  ! SUB             [ reduce using rule 41 (exp -> exp LE exp .) ]
+  ! MUL             [ reduce using rule 41 (exp -> exp LE exp .) ]
+  ! DIV             [ reduce using rule 41 (exp -> exp LE exp .) ]
+  ! MOD             [ reduce using rule 41 (exp -> exp LE exp .) ]
+  ! L               [ shift and go to state 49 ]
+  ! E               [ shift and go to state 50 ]
+  ! G               [ shift and go to state 51 ]
+  ! NE              [ shift and go to state 52 ]
+  ! LE              [ shift and go to state 53 ]
+  ! GE              [ shift and go to state 54 ]
+  ! AND             [ shift and go to state 55 ]
+  ! OR              [ shift and go to state 56 ]
+
+
+state 75
+
+    (42) exp -> exp GE exp .
+    (31) exp -> exp . SUM exp
+    (32) exp -> exp . SUB exp
+    (33) exp -> exp . MUL exp
+    (34) exp -> exp . DIV exp
+    (36) exp -> exp . MOD exp
+    (37) exp -> exp . L exp
+    (38) exp -> exp . E exp
+    (39) exp -> exp . G exp
+    (40) exp -> exp . NE exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . AND exp
+    (44) exp -> exp . OR exp
+
+    THEN            reduce using rule 42 (exp -> exp GE exp .)
+    L               reduce using rule 42 (exp -> exp GE exp .)
+    E               reduce using rule 42 (exp -> exp GE exp .)
+    G               reduce using rule 42 (exp -> exp GE exp .)
+    NE              reduce using rule 42 (exp -> exp GE exp .)
+    LE              reduce using rule 42 (exp -> exp GE exp .)
+    GE              reduce using rule 42 (exp -> exp GE exp .)
+    AND             reduce using rule 42 (exp -> exp GE exp .)
+    OR              reduce using rule 42 (exp -> exp GE exp .)
+    DO              reduce using rule 42 (exp -> exp GE exp .)
+    OF              reduce using rule 42 (exp -> exp GE exp .)
+    END             reduce using rule 42 (exp -> exp GE exp .)
+    SEMICOLON       reduce using rule 42 (exp -> exp GE exp .)
+    ELSE            reduce using rule 42 (exp -> exp GE exp .)
+    RCB             reduce using rule 42 (exp -> exp GE exp .)
+    SUM             shift and go to state 44
+    SUB             shift and go to state 45
+    MUL             shift and go to state 46
+    DIV             shift and go to state 47
+    MOD             shift and go to state 48
+
+  ! SUM             [ reduce using rule 42 (exp -> exp GE exp .) ]
+  ! SUB             [ reduce using rule 42 (exp -> exp GE exp .) ]
+  ! MUL             [ reduce using rule 42 (exp -> exp GE exp .) ]
+  ! DIV             [ reduce using rule 42 (exp -> exp GE exp .) ]
+  ! MOD             [ reduce using rule 42 (exp -> exp GE exp .) ]
+  ! L               [ shift and go to state 49 ]
+  ! E               [ shift and go to state 50 ]
+  ! G               [ shift and go to state 51 ]
+  ! NE              [ shift and go to state 52 ]
+  ! LE              [ shift and go to state 53 ]
+  ! GE              [ shift and go to state 54 ]
+  ! AND             [ shift and go to state 55 ]
+  ! OR              [ shift and go to state 56 ]
+
+
+state 76
+
+    (43) exp -> exp AND exp .
+    (31) exp -> exp . SUM exp
+    (32) exp -> exp . SUB exp
+    (33) exp -> exp . MUL exp
+    (34) exp -> exp . DIV exp
+    (36) exp -> exp . MOD exp
+    (37) exp -> exp . L exp
+    (38) exp -> exp . E exp
+    (39) exp -> exp . G exp
+    (40) exp -> exp . NE exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . AND exp
+    (44) exp -> exp . OR exp
+
+    THEN            reduce using rule 43 (exp -> exp AND exp .)
+    AND             reduce using rule 43 (exp -> exp AND exp .)
+    OR              reduce using rule 43 (exp -> exp AND exp .)
+    DO              reduce using rule 43 (exp -> exp AND exp .)
+    OF              reduce using rule 43 (exp -> exp AND exp .)
+    END             reduce using rule 43 (exp -> exp AND exp .)
+    SEMICOLON       reduce using rule 43 (exp -> exp AND exp .)
+    ELSE            reduce using rule 43 (exp -> exp AND exp .)
+    RCB             reduce using rule 43 (exp -> exp AND exp .)
+    SUM             shift and go to state 44
+    SUB             shift and go to state 45
+    MUL             shift and go to state 46
+    DIV             shift and go to state 47
+    MOD             shift and go to state 48
+    L               shift and go to state 49
+    E               shift and go to state 50
+    G               shift and go to state 51
+    NE              shift and go to state 52
+    LE              shift and go to state 53
+    GE              shift and go to state 54
+
+  ! SUM             [ reduce using rule 43 (exp -> exp AND exp .) ]
+  ! SUB             [ reduce using rule 43 (exp -> exp AND exp .) ]
+  ! MUL             [ reduce using rule 43 (exp -> exp AND exp .) ]
+  ! DIV             [ reduce using rule 43 (exp -> exp AND exp .) ]
+  ! MOD             [ reduce using rule 43 (exp -> exp AND exp .) ]
+  ! L               [ reduce using rule 43 (exp -> exp AND exp .) ]
+  ! E               [ reduce using rule 43 (exp -> exp AND exp .) ]
+  ! G               [ reduce using rule 43 (exp -> exp AND exp .) ]
+  ! NE              [ reduce using rule 43 (exp -> exp AND exp .) ]
+  ! LE              [ reduce using rule 43 (exp -> exp AND exp .) ]
+  ! GE              [ reduce using rule 43 (exp -> exp AND exp .) ]
+  ! AND             [ shift and go to state 55 ]
+  ! OR              [ shift and go to state 56 ]
+
+
+state 77
+
+    (44) exp -> exp OR exp .
+    (31) exp -> exp . SUM exp
+    (32) exp -> exp . SUB exp
+    (33) exp -> exp . MUL exp
+    (34) exp -> exp . DIV exp
+    (36) exp -> exp . MOD exp
+    (37) exp -> exp . L exp
+    (38) exp -> exp . E exp
+    (39) exp -> exp . G exp
+    (40) exp -> exp . NE exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . AND exp
+    (44) exp -> exp . OR exp
+
+    THEN            reduce using rule 44 (exp -> exp OR exp .)
+    AND             reduce using rule 44 (exp -> exp OR exp .)
+    OR              reduce using rule 44 (exp -> exp OR exp .)
+    DO              reduce using rule 44 (exp -> exp OR exp .)
+    OF              reduce using rule 44 (exp -> exp OR exp .)
+    END             reduce using rule 44 (exp -> exp OR exp .)
+    SEMICOLON       reduce using rule 44 (exp -> exp OR exp .)
+    ELSE            reduce using rule 44 (exp -> exp OR exp .)
+    RCB             reduce using rule 44 (exp -> exp OR exp .)
+    SUM             shift and go to state 44
+    SUB             shift and go to state 45
+    MUL             shift and go to state 46
+    DIV             shift and go to state 47
+    MOD             shift and go to state 48
+    L               shift and go to state 49
+    E               shift and go to state 50
+    G               shift and go to state 51
+    NE              shift and go to state 52
+    LE              shift and go to state 53
+    GE              shift and go to state 54
+
+  ! SUM             [ reduce using rule 44 (exp -> exp OR exp .) ]
+  ! SUB             [ reduce using rule 44 (exp -> exp OR exp .) ]
+  ! MUL             [ reduce using rule 44 (exp -> exp OR exp .) ]
+  ! DIV             [ reduce using rule 44 (exp -> exp OR exp .) ]
+  ! MOD             [ reduce using rule 44 (exp -> exp OR exp .) ]
+  ! L               [ reduce using rule 44 (exp -> exp OR exp .) ]
+  ! E               [ reduce using rule 44 (exp -> exp OR exp .) ]
+  ! G               [ reduce using rule 44 (exp -> exp OR exp .) ]
+  ! NE              [ reduce using rule 44 (exp -> exp OR exp .) ]
+  ! LE              [ reduce using rule 44 (exp -> exp OR exp .) ]
+  ! GE              [ reduce using rule 44 (exp -> exp OR exp .) ]
+  ! AND             [ shift and go to state 55 ]
+  ! OR              [ shift and go to state 56 ]
+
+
+state 78
+
+    (46) exp -> LCB exp RCB .
+
+    THEN            reduce using rule 46 (exp -> LCB exp RCB .)
+    SUM             reduce using rule 46 (exp -> LCB exp RCB .)
+    SUB             reduce using rule 46 (exp -> LCB exp RCB .)
+    MUL             reduce using rule 46 (exp -> LCB exp RCB .)
+    DIV             reduce using rule 46 (exp -> LCB exp RCB .)
+    MOD             reduce using rule 46 (exp -> LCB exp RCB .)
+    L               reduce using rule 46 (exp -> LCB exp RCB .)
+    E               reduce using rule 46 (exp -> LCB exp RCB .)
+    G               reduce using rule 46 (exp -> LCB exp RCB .)
+    NE              reduce using rule 46 (exp -> LCB exp RCB .)
+    LE              reduce using rule 46 (exp -> LCB exp RCB .)
+    GE              reduce using rule 46 (exp -> LCB exp RCB .)
+    AND             reduce using rule 46 (exp -> LCB exp RCB .)
+    OR              reduce using rule 46 (exp -> LCB exp RCB .)
+    DO              reduce using rule 46 (exp -> LCB exp RCB .)
+    OF              reduce using rule 46 (exp -> LCB exp RCB .)
+    END             reduce using rule 46 (exp -> LCB exp RCB .)
+    SEMICOLON       reduce using rule 46 (exp -> LCB exp RCB .)
+    ELSE            reduce using rule 46 (exp -> LCB exp RCB .)
+    RCB             reduce using rule 46 (exp -> LCB exp RCB .)
+
+
+state 79
+
+    (16) statement -> WHILE exp DO statement .
+
+    END             reduce using rule 16 (statement -> WHILE exp DO statement .)
+    SEMICOLON       reduce using rule 16 (statement -> WHILE exp DO statement .)
+    ELSE            reduce using rule 16 (statement -> WHILE exp DO statement .)
+
+
+state 80
+
+    (18) statement -> PRINT LCB exp RCB .
+
+    END             reduce using rule 18 (statement -> PRINT LCB exp RCB .)
+    SEMICOLON       reduce using rule 18 (statement -> PRINT LCB exp RCB .)
+    ELSE            reduce using rule 18 (statement -> PRINT LCB exp RCB .)
+
+
+state 81
+
+    (19) statement -> SWITCH exp OF cases . default_case DONE
+    (20) default_case -> . DEFAULT statement SEMICOLON
+    (21) default_case -> . empty
+    (47) empty -> .
+
+    DEFAULT         shift and go to state 90
+    DONE            reduce using rule 47 (empty -> .)
+
+    default_case                   shift and go to state 89
+    empty                          shift and go to state 91
+
+state 82
+
+    (22) cases -> constant_list . DOUBLEDOT statement SEMICOLON cases
+    (25) constant_list -> constant_list . COMMA constant
+
+    DOUBLEDOT       shift and go to state 92
+    COMMA           shift and go to state 93
+
+
+state 83
+
+    (23) cases -> empty .
+
+    DEFAULT         reduce using rule 23 (cases -> empty .)
+    DONE            reduce using rule 23 (cases -> empty .)
+
+
+state 84
+
+    (24) constant_list -> constant .
+
+    DOUBLEDOT       reduce using rule 24 (constant_list -> constant .)
+    COMMA           reduce using rule 24 (constant_list -> constant .)
+
+
+state 85
+
+    (26) constant -> REAL_CONSTANT .
+
+    DOUBLEDOT       reduce using rule 26 (constant -> REAL_CONSTANT .)
+    COMMA           reduce using rule 26 (constant -> REAL_CONSTANT .)
+
+
+state 86
+
+    (27) constant -> INTEGER_CONSTANT .
+
+    DOUBLEDOT       reduce using rule 27 (constant -> INTEGER_CONSTANT .)
+    COMMA           reduce using rule 27 (constant -> INTEGER_CONSTANT .)
+
+
+state 87
+
+    (5) declaration_list -> declaration_list SEMICOLON identifier_list DOUBLEDOT type .
+
+    SEMICOLON       reduce using rule 5 (declaration_list -> declaration_list SEMICOLON identifier_list DOUBLEDOT type .)
+    BEGIN           reduce using rule 5 (declaration_list -> declaration_list SEMICOLON identifier_list DOUBLEDOT type .)
+
+
+state 88
+
+    (14) statement -> IF exp THEN statement ELSE . statement
+    (13) statement -> . IDENTIFIER ASSIGN exp
+    (14) statement -> . IF exp THEN statement ELSE statement
+    (15) statement -> . IF exp THEN statement
+    (16) statement -> . WHILE exp DO statement
+    (17) statement -> . compound_statement
+    (18) statement -> . PRINT LCB exp RCB
+    (19) statement -> . SWITCH exp OF cases default_case DONE
+    (10) compound_statement -> . BEGIN statement_list END
+
+    IDENTIFIER      shift and go to state 14
+    IF              shift and go to state 15
+    WHILE           shift and go to state 16
+    PRINT           shift and go to state 18
+    SWITCH          shift and go to state 19
+    BEGIN           shift and go to state 8
+
+    statement                      shift and go to state 94
+    compound_statement             shift and go to state 17
+
+state 89
+
+    (19) statement -> SWITCH exp OF cases default_case . DONE
+
+    DONE            shift and go to state 95
+
+
+state 90
+
+    (20) default_case -> DEFAULT . statement SEMICOLON
+    (13) statement -> . IDENTIFIER ASSIGN exp
+    (14) statement -> . IF exp THEN statement ELSE statement
+    (15) statement -> . IF exp THEN statement
+    (16) statement -> . WHILE exp DO statement
+    (17) statement -> . compound_statement
+    (18) statement -> . PRINT LCB exp RCB
+    (19) statement -> . SWITCH exp OF cases default_case DONE
+    (10) compound_statement -> . BEGIN statement_list END
+
+    IDENTIFIER      shift and go to state 14
+    IF              shift and go to state 15
+    WHILE           shift and go to state 16
+    PRINT           shift and go to state 18
+    SWITCH          shift and go to state 19
+    BEGIN           shift and go to state 8
+
+    statement                      shift and go to state 96
+    compound_statement             shift and go to state 17
+
+state 91
+
+    (21) default_case -> empty .
+
+    DONE            reduce using rule 21 (default_case -> empty .)
+
+
+state 92
+
+    (22) cases -> constant_list DOUBLEDOT . statement SEMICOLON cases
+    (13) statement -> . IDENTIFIER ASSIGN exp
+    (14) statement -> . IF exp THEN statement ELSE statement
+    (15) statement -> . IF exp THEN statement
+    (16) statement -> . WHILE exp DO statement
+    (17) statement -> . compound_statement
+    (18) statement -> . PRINT LCB exp RCB
+    (19) statement -> . SWITCH exp OF cases default_case DONE
+    (10) compound_statement -> . BEGIN statement_list END
+
+    IDENTIFIER      shift and go to state 14
+    IF              shift and go to state 15
+    WHILE           shift and go to state 16
+    PRINT           shift and go to state 18
+    SWITCH          shift and go to state 19
+    BEGIN           shift and go to state 8
+
+    statement                      shift and go to state 97
+    compound_statement             shift and go to state 17
+
+state 93
+
+    (25) constant_list -> constant_list COMMA . constant
+    (26) constant -> . REAL_CONSTANT
+    (27) constant -> . INTEGER_CONSTANT
+
+    REAL_CONSTANT   shift and go to state 85
+    INTEGER_CONSTANT shift and go to state 86
+
+    constant                       shift and go to state 98
+
+state 94
+
+    (14) statement -> IF exp THEN statement ELSE statement .
+
+    END             reduce using rule 14 (statement -> IF exp THEN statement ELSE statement .)
+    SEMICOLON       reduce using rule 14 (statement -> IF exp THEN statement ELSE statement .)
+    ELSE            reduce using rule 14 (statement -> IF exp THEN statement ELSE statement .)
+
+
+state 95
+
+    (19) statement -> SWITCH exp OF cases default_case DONE .
+
+    END             reduce using rule 19 (statement -> SWITCH exp OF cases default_case DONE .)
+    SEMICOLON       reduce using rule 19 (statement -> SWITCH exp OF cases default_case DONE .)
+    ELSE            reduce using rule 19 (statement -> SWITCH exp OF cases default_case DONE .)
+
+
+state 96
+
+    (20) default_case -> DEFAULT statement . SEMICOLON
+
+    SEMICOLON       shift and go to state 99
+
+
+state 97
+
+    (22) cases -> constant_list DOUBLEDOT statement . SEMICOLON cases
+
+    SEMICOLON       shift and go to state 100
+
+
+state 98
+
+    (25) constant_list -> constant_list COMMA constant .
+
+    DOUBLEDOT       reduce using rule 25 (constant_list -> constant_list COMMA constant .)
+    COMMA           reduce using rule 25 (constant_list -> constant_list COMMA constant .)
+
+
+state 99
+
+    (20) default_case -> DEFAULT statement SEMICOLON .
+
+    DONE            reduce using rule 20 (default_case -> DEFAULT statement SEMICOLON .)
+
+
+state 100
+
+    (22) cases -> constant_list DOUBLEDOT statement SEMICOLON . cases
+    (22) cases -> . constant_list DOUBLEDOT statement SEMICOLON cases
+    (23) cases -> . empty
+    (24) constant_list -> . constant
+    (25) constant_list -> . constant_list COMMA constant
+    (47) empty -> .
+    (26) constant -> . REAL_CONSTANT
+    (27) constant -> . INTEGER_CONSTANT
+
+    DEFAULT         reduce using rule 47 (empty -> .)
+    DONE            reduce using rule 47 (empty -> .)
+    REAL_CONSTANT   shift and go to state 85
+    INTEGER_CONSTANT shift and go to state 86
+
+    constant_list                  shift and go to state 82
+    cases                          shift and go to state 101
+    empty                          shift and go to state 83
+    constant                       shift and go to state 84
+
+state 101
+
+    (22) cases -> constant_list DOUBLEDOT statement SEMICOLON cases .
+
+    DEFAULT         reduce using rule 22 (cases -> constant_list DOUBLEDOT statement SEMICOLON cases .)
+    DONE            reduce using rule 22 (cases -> constant_list DOUBLEDOT statement SEMICOLON cases .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for ELSE in state 64 resolved as shift
